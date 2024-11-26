@@ -226,3 +226,23 @@ a.active {
 		color: var(--clr2bg-light);
 	}
 }
+
+
+.app-header section:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+.app-header-custom .app-nav {
+    display: flex;
+    gap: 15px;
+	color: rgb(40, 21, 134);
+}
+
+.app-header-custom .active {
+    color: black;
+    font-weight: 600;
+    text-decoration: underline;
+}
