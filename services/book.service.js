@@ -35,7 +35,9 @@ function query(filterBy = {}) {
                 // TODO - filtering 
 
             console.log("PLEASE NOTICE  no filter is implemented yet... TODO")
+    
             return books
+
         })
 }
 
@@ -102,7 +104,10 @@ function _createBooks() {
             books.push(book)
         }
         utilService.saveToStorage(BOOK_KEY, books)
+        // console.log("DEBUG - books created. books : ", books)
+
     }
+
 }
 
 
