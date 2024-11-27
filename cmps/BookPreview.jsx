@@ -1,5 +1,3 @@
-
-
 /* i'ts a preview of the item, usually links to another page
     with the full details.
     It gets an item as a prop and renders it.
@@ -9,12 +7,15 @@
 
 */
 
-
 export function BookPreview({ book }) {
 
     return (
         <article className="book-preview">
-           <h1>book preview... under construction...</h1>
+           <h1>Book Preview: </h1>
+           <h2>Book Title: {book.title}</h2>
+           <h4>Subtitle: {book.subtitle}</h4>
+           <h4>Authors: {book.authors}</h4>
+           <h5>Price: {book.lostPrice.amount}</h5>
         </article>
     )
 }
