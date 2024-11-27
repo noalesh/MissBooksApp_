@@ -34,7 +34,7 @@ export function BookDetails() {
     if (!book) return <div>Loading Book Info...</div>
     console.log("inside BookDetails... book is: ", book)
     return (
-        <section className="bookDetails">
+        <section className="book-details">
             <h1 >Book Details :</h1>
             <h2>Book Title: {book.title}</h2>
             <h2>Book Subtitle: {book.subtitle}</h2>

@@ -90,7 +90,7 @@ export function BookIndex() {
 
     if (!books) return <div>Loading books...</div>
     return (
-        <section className="bookIndex">
+        <section className="book-index">
             <h1 >Book Index page</h1>
             <p>UNDER CONSTRUCTION.... for the meanwhile, here are the books:</p>
             <ul>
