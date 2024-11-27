@@ -30,6 +30,7 @@ export function BookDetails() {
 /// TODO - can I assume that the books' images will be called by their title?
 
     if (!book) return <div>Loading Book Info...</div>
+    console.log("inside BookDetails... book is: ", book)
     return (
         <section className="bookDetails">
             <h1 >Book Details :</h1>
@@ -41,13 +42,13 @@ export function BookDetails() {
             <h2>Book PageCount: {book.pageCount}</h2>
             <h2>Book Categories: {book.categories}</h2>
             <h2>Book Language: {book.language}</h2>
-            <h2>Book ListPrice: {book.listPrice}</h2>
-            <img src={`../BookImages/${book.title}.png`} alt="book-cover-image" />
+            <h2>Book ListPrice: {book.listPrice.amount}</h2>
+             <img src={`../BookImages/${book.title}.png`} alt="book-cover-image" />
             <button onClick={onBack}>Back</button>
             <section>
                 <button><Link to={`/book/${book.prevBookId}`}>Prev Book</Link></button>
                 <button><Link to={`/book/${book.nextBookId}`}>Next Book</Link></button>
-            </section>
+            </section>  
 
         </section>
     )
