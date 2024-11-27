@@ -45,7 +45,7 @@ export function BookDetails() {
             <h2>Book Categories: {book.categories}</h2>
             <h2>Book Language: {book.language}</h2>
             <h2>Book ListPrice: {book.listPrice.amount}</h2>
-             <img src={`../BookImages/${book.title}.png`} alt="book-cover-image" />
+             <img src={book.thumbnail} alt="book-cover-image" />
             <button onClick={onBack}>Back</button>
             <section>
                 <button><Link to={`/book/${book.prevBookId}`}>Prev Book</Link></button>
