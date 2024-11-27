@@ -19,7 +19,9 @@ export function BookDetails() {
         bookService.get(params.bookId)
             .then(setBook)
             .catch(err => {
-                console.log('Problem getting book', err);
+                console.log('Problem getting book', err)
+                alert("Sorry, we could not find the requested book...")
+                navigate('/book')
             })
     }
 
