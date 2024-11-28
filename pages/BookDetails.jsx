@@ -35,17 +35,18 @@ export function BookDetails() {
     console.log("inside BookDetails... book is: ", book)
     return (
         <section className="book-details">
-            <h1 >Book Details :</h1>
-            <h2>Book Title: {book.title}</h2>
-            <h2>Book Subtitle: {book.subtitle}</h2>
-            <h2>Book Authors: {book.authors}</h2>
-            <h2>Book PublishedDate: {book.publishedDate}</h2>
-            <h2>Book Description: {book.description}</h2>
-            <h2>Book PageCount: {book.pageCount}</h2>
-            <h2>Book Categories: {book.categories}</h2>
-            <h2>Book Language: {book.language}</h2>
-            <h2>Book ListPrice: {book.listPrice.amount}</h2>
-             <img src={book.thumbnail} alt="book-cover-image" />
+            <h1>Book Details :</h1>
+            <h2><span>Book Title:</span> {book.title}</h2>
+            <h2><span>Book Subtitle:</span> {book.subtitle}</h2>
+            <h2><span>Book Authors:</span> {book.authors}</h2>
+            <h2><span>Book PublishedDate:</span> {book.publishedDate}</h2>
+            <h2><span>Book Description:</span> {book.description}</h2>
+            <h2><span>Book PageCount:</span> {book.pageCount}</h2>
+            <h2><span>Book Categories:</span> {book.categories}</h2>
+            <h2><span>Book Language:</span> {book.language}</h2>
+            <h2><span>Book ListPrice:</span> {book.listPrice.amount}</h2>
+            <img src={book.thumbnail} alt="book-cover-image" />
+            <br></br>
             <button onClick={onBack}>Back</button>
             <section>
                 <button><Link to={`/book/${book.prevBookId}`}>Prev Book</Link></button>

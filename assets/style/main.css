@@ -246,3 +246,25 @@ a.active {
     font-weight: 600;
     text-decoration: underline;
 }
+
+.book-details span{
+    color: rgb(193, 14, 14);
+
+}
+
+.book-details h1{
+    color: rgb(26, 11, 126);
+	font-size: x-large;
+
+}
+
+.book-details h2{
+    color: rgb(26, 11, 126);
+	font-size: medium;
+
+}
+
+.book-details img {
+	height: 30%;
+	width: 20%;
+}
