@@ -248,23 +248,41 @@ a.active {
 }
 
 .book-details span{
-    color: rgb(193, 14, 14);
+    color: rgb(215, 111, 13);
 
 }
 
 .book-details h1{
     color: rgb(26, 11, 126);
 	font-size: x-large;
-
 }
 
 .book-details h2{
+    color: rgb(211, 138, 10);
+	font-size: medium;
+}
+
+.book-details .bookDetailsValue{
     color: rgb(26, 11, 126);
 	font-size: medium;
-
 }
 
 .book-details img {
 	height: 30%;
 	width: 20%;
+}
+
+.book-details .extraInfo{
+    color: rgb(193, 14, 133);
+	font-style: italic;
+	padding-left: 3%;
+	font-size: medium;
+}
+
+.book-details .redPrice {
+	color: rgb(195, 4, 4)
+}
+
+.book-details .greenPrice {
+	color: rgb(0, 255, 21)
 }
