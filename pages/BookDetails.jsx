@@ -1,4 +1,6 @@
 import { bookService } from "../services/book.service.js"
+import { LongTxt } from "../cmps/LongTxt.jsx"
+
 
 const { useEffect, useState } = React
 const { useParams, useNavigate, Link } = ReactRouterDOM
@@ -83,12 +85,16 @@ export function BookDetails() {
             <h2>Book Title: <span className="bookDetailsValue">{book.title}</span></h2>
             <h2>Book Subtitle: <span className="bookDetailsValue">{book.subtitle}</span></h2>
             <h2>Book Authors: <span className="bookDetailsValue">{book.authors}</span></h2>
-            <h2>Book PublishedDate: <span className="bookDetailsValue">{book.publishedDate}</span> <span className="extraInfo">{calculateVintage()}</span></h2>
-            <h2>Book Description: <span className="bookDetailsValue">{book.description}</span></h2>
-            <h2>Book Page Count: <span className="bookDetailsValue">{book.pageCount}</span> <span className="extraInfo">{calculatePageCount()}</span></h2>
+            <h2>Book PublishedDate: <span className="bookDetailsValue">{book.publishedDate}</span> 
+                <span className="extraInfo">{calculateVintage()}</span></h2>
+            <h2>Book Description: <span className="bookDetailsValue">
+                <LongTxt txt={book.description}></LongTxt></span></h2>
+            <h2>Book Page Count: <span className="bookDetailsValue">{book.pageCount}</span> 
+                <span className="extraInfo">{calculatePageCount()}</span></h2>
             <h2>Book Categories: <span className="bookDetailsValue">{book.categories}</span></h2>
             <h2>Book Language: <span className="bookDetailsValue">{book.language}</span></h2>
-            <h2>Book Price: <span className={calculatePriceClassName()}>{book.listPrice.amount}</span> {isOnSale() && <span className="importantInfo">ON SALE!!!</span>}</h2>
+            <h2>Book Price: <span className={calculatePriceClassName()}>{book.listPrice.amount}</span> 
+                {isOnSale() && <span className="importantInfo">ON SALE!!!</span>}</h2>
             <img src={book.thumbnail} alt="book-cover-image" />
             <br></br>
             <button onClick={onBack}>Back</button>
