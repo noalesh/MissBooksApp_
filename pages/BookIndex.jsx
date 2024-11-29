@@ -79,26 +79,21 @@ export function BookIndex() {
     )*/
     }
 
+    /* note to self - 
 
-
-
-
-
-
-
-
+     <ul>
+                {books.map(book => {
+                return <li key={book.id}> {book.title}</li>;
+                })}
+            </ul>
+    */
 
     if (!books) return <div>Loading books...</div>
     return (
         <section className="book-index">
             <h1 >Book Index page</h1>
-            <p>UNDER CONSTRUCTION.... for the meanwhile, here are the books:</p>
-            <ul>
-                {books.map(book => {
-                return <li key={book.id}> {book.title}</li>;
-                })}
-            </ul>
-
+            <p>UNDER CONSTRUCTION.... TODO - filter needs to be added</p>
+           <BookList books={books} onRemoveBook={onRemoveBook}/>
         </section>
     )
 }

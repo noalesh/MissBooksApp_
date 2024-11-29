@@ -15,7 +15,7 @@ export function BookPreview({ book }) {
            <h2>Book Title: {book.title}</h2>
            <h4>Subtitle: {book.subtitle}</h4>
            <h4>Authors: {book.authors}</h4>
-           <h5>Price: {book.lostPrice.amount}</h5>
+           <h5>Price: {book.listPrice.amount}</h5>
         </article>
     )
 }
