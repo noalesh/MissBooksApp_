@@ -286,3 +286,10 @@ a.active {
 .book-details .greenPrice {
 	color: rgb(0, 255, 21)
 }
+
+.book-details .importantInfo {
+	color: rgb(195, 4, 4);
+	font-style: italic;
+	padding-left: 3%;
+	font-size: x-large;
+}

@@ -67,6 +67,10 @@ export function BookDetails() {
         }
     }
 
+    function isOnSale() {
+        return book.listPrice.isOnSale
+    }
+
 
 /// TODO - what is prevBookId ??? where do we set it ??? ////////
 /// TODO - can I assume that the books' images will be called by their title?
@@ -84,7 +88,7 @@ export function BookDetails() {
             <h2>Book Page Count: <span className="bookDetailsValue">{book.pageCount}</span> <span className="extraInfo">{calculatePageCount()}</span></h2>
             <h2>Book Categories: <span className="bookDetailsValue">{book.categories}</span></h2>
             <h2>Book Language: <span className="bookDetailsValue">{book.language}</span></h2>
-            <h2>Book Price: <span className={calculatePriceClassName()}>{book.listPrice.amount}</span></h2>
+            <h2>Book Price: <span className={calculatePriceClassName()}>{book.listPrice.amount}</span> {isOnSale() && <span className="importantInfo">ON SALE!!!</span>}</h2>
             <img src={book.thumbnail} alt="book-cover-image" />
             <br></br>
             <button onClick={onBack}>Back</button>
