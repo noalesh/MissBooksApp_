@@ -293,3 +293,51 @@ a.active {
 	padding-left: 3%;
 	font-size: x-large;
 }
+
+.book-preview {
+    text-align: center;
+    padding: 0.5em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.book-preview h4 {
+    text-transform: capitalize;
+    color: black;
+}
+
+.book-preview img {
+    max-width: 100px;
+}
+
+.book-list {
+    list-style: none;
+    padding: 15px 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+.book-list li {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color:rgb(233, 206, 221);
+    padding-block: 0.2em;
+}
+
+.book-list button {
+    background-color:rgb(139, 13, 82);
+	color: blanchedalmond;
+}
+
+.book-preview h2 {
+	font-style: italic;
+}
+
+
+.book-preview .book-name {
+	color: rgb(226, 15, 205);
+}

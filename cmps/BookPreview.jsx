@@ -12,7 +12,7 @@ export function BookPreview({ book }) {
     return (
         <article className="book-preview">
            <h1>Book Preview: </h1>
-           <h2>Book Title: {book.title}</h2>
+           <h2>Book Title: <span className="book-name">{book.title}</span></h2>
            <h4>Subtitle: {book.subtitle}</h4>
            <h4>Authors: {book.authors}</h4>
            <h5>Price: {book.listPrice.amount}</h5>
