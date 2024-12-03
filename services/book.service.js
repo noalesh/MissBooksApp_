@@ -26,14 +26,22 @@ export const bookService = {
 function query(filterBy = {}) {
     return storageService.query(BOOK_KEY)
         .then(books => {
-          /*  if (filterBy.txt) {
-                const regExp = new RegExp(filterBy.txt, 'i')
-                books = books.filter(book => regExp.test(car.vendor))
+            console.log("inside query - filterBy is: ", filterBy)
+            if (filterBy.title) {
+                const regExp = new RegExp(filterBy.title, 'i')
+                books = books.filter(book => regExp.test(book.title))
             }
 
-            if (filterBy.minSpeed) {
-                cars = cars.filter(car => car.maxSpeed >= filterBy.minSpeed)
-            }*/
+            if (filterBy.minPrice) {
+                if (filterBy.maxPrice) {
+                    books = books.filter(book => (book.listPrice.amount>=filterBy.minPrice) 
+                                                && (book.listPrice.amount <= filterBy.maxPrice))
+                } else {
+                    books = books.filter(book => book.listPrice.amount >= filterBy.minPrice)
+                }
+            } else if (filterBy.maxPrice) {
+                books = books.filter(book => book.listPrice.amount <= filterBy.maxPrice)
+            }
 
 
                 // TODO - filtering 
@@ -76,22 +84,32 @@ function _setNextPrevBookId(book) {
 
 // it doesn't make any sense to filter by the fields: 
 //       id, description, thumbnail.
+// I also don't allow filter by: subtitle.
+// Only 1 author in filter is supported.
+// TODO - I can't default to null or undefined!
+// ??????????
+// I defaulted all the values that we can filter by to 'undefined', so I
+// will know what the user input is. It can't be null as this causes an 
+// error when i set the value inpt the <input> when implementing
+// the "2-way data binding".  
 function getDefaultFilter(
-        filterBy = { title:"", subtitle:"", 
-        authors:[], publishedDate:null, 
-        pageCount:0, categories:[],
-        language:"", listPrice:{} }) {
+        filterBy = { title:'',  
+        author:'', publishedDate:'', 
+        pageCount:'', categories:'',
+        language:'', minPrice:'', maxPrice:'' }) {
     return {    
             title: filterBy.title, 
-            subtitle: filterBy.subtitle,
-            authors: filterBy.authors,
+            author: filterBy.author,
             publishedDate: filterBy.publishedDate,
             pageCount: filterBy.pageCount, 
             categories: filterBy.categories,
             language: filterBy.language,
-            listPrice: filterBy.listPrice
+            minPrice: filterBy.minPrice,
+            maxPrice: filterBy.maxPrice
         }
 }
+
+// TODO - filter by price
 
 function _createBooks() {
     let books = utilService.loadFromStorage(BOOK_KEY)

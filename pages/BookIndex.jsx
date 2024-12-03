@@ -18,15 +18,16 @@ const { useEffect, useState } = React
 export function BookIndex() {
 
     const [books, setBooks] = useState(null)
+    const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter())
 
 
     useEffect(() => {
         loadBooks()
-    }, [])
+    }, [filterBy])
 
     function loadBooks() {
-        bookService.query()
-        // Note to self - the function beong passed to .then - meaning, 
+        bookService.query(filterBy)
+        // Note to self - the function being passed to .then - meaning, 
         // setBooks, is being called with the value that the 
         // promise was fulfilled with.
             .then(setBooks)
@@ -53,17 +54,12 @@ export function BookIndex() {
 
 
     function onSetFilter(filterBy) {
-         console.log('filterBy:', filterBy)
-
-         /// TODO - implement filter
-
-        console.log("TODO - implement filter !!!!!")
-
-   /*     setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
+        console.log('filterBy:', filterBy)
+        setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
     }
     // console.log('index render');
     
-    if (!cars) return <div>Loading...</div>
+   /* if (!cars) return <div>Loading...</div>
     return (
         <section className="car-index">
             <CarFilter defaultFilter={filterBy} onSetFilter={onSetFilter} />
@@ -76,11 +72,10 @@ export function BookIndex() {
                 onRemoveCar={onRemoveCar}
             />
         </section>
-    )*/
-    }
+    )
+    }*/
 
     /* note to self - 
-
      <ul>
                 {books.map(book => {
                 return <li key={book.id}> {book.title}</li>;
@@ -91,8 +86,7 @@ export function BookIndex() {
     if (!books) return <div>Loading books...</div>
     return (
         <section className="book-index">
-            <h1 >Book Index page</h1>
-            <p>UNDER CONSTRUCTION.... TODO - filter needs to be added</p>
+           <BookFilter defaultFilter={filterBy} onSetFilter={onSetFilter}/>
            <BookList books={books} onRemoveBook={onRemoveBook}/>
         </section>
     )
