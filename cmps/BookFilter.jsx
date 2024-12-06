@@ -53,8 +53,9 @@ export function BookFilter({ defaultFilter, onSetFilter }) {
 
     // following funtion is from class :
     function handleChange({ target }) {
-        // TODO - this is equivalent to "const field = target.name" - WHY???
-        /// ???????????????
+        // note to self:
+        // the following line is equivalent to: "const field = target.name"
+        /// this was done so just to change the name of the field from "name" to "field"
         let { value, name: field } = target
         switch (target.type) {
             case 'range':
@@ -80,23 +81,43 @@ export function BookFilter({ defaultFilter, onSetFilter }) {
 
     // notes to self :
     // in order to implement the "2 way data binding" - the following line, and "value" fields in the <input>.
-    const { bookName, minPrice, maxPrice } = filterByToEdit
+    const { bookName, author, minPrice, maxPrice, language, minPublishedYear, maxPublishedYear} = filterByToEdit
     // 'name' is the key in the object we are editing...
     // 'id' has the same value as in 'htmlFor' becasue it's what connecting them.
     // vanila 'for' in tage <label> is 'htmlFor' in React.
+
+    // TODO !!!!!!!!!!!!!!//////////////////////
+    // the filter DOES NOT stick when we enter "BookDetails", meaning, if i search for something and then
+    // enter the "book details", and click next book/prev book/back -> the results does not show the filtering.
+    ////////////////    ????????????????
+
+    
     return (
         <article className="book-filter">
            <h1>Please enter filter values:</h1>
            <form onSubmit={onSubmitFilter}>
-                <label htmlFor="bookName">Book Name</label>
+                <label htmlFor="bookName">Book Name: </label>
                 <input  value={bookName} onChange={handleChange} type="text" name="title" id="bookName" />
 
-                <label htmlFor="minPrice">Min Price</label>
+                <label htmlFor="author">Author: </label>
+                <input  value={author} onChange={handleChange} type="text" name="author" id="author" />
+
+                <label htmlFor="minPrice">Min Price: </label>
                 <input  value={minPrice} onChange={handleChange} type="number" name="minPrice" id="minPrice" />
 
-                <label htmlFor="maxPrice">Max Price</label>
+                <label htmlFor="maxPrice">Max Price: </label>
                 <input  value={maxPrice} onChange={handleChange} type="number" name="maxPrice" id="maxPrice" />
 
+                <label htmlFor="minPublishedYear">Min Published Year: </label>
+                <input  value={minPublishedYear} onChange={handleChange} type="number" name="minPublishedYear" id="minPublishedYear" />
+
+                <label htmlFor="maxPublishedYear">Max Published Year: </label>
+                <input  value={maxPublishedYear} onChange={handleChange} type="number" name="maxPublishedYear" id="maxPublishedYear" />
+                
+                <label htmlFor="lang">Language: </label>
+                <input  value={language} onChange={handleChange} type="text" name="language" id="lang" />
+
+                
 
                 <button>Submit</button>
 

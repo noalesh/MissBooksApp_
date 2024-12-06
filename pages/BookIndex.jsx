@@ -23,6 +23,7 @@ export function BookIndex() {
 
     useEffect(() => {
         loadBooks()
+      //  console.log("inside BookIndex useEffect - books.length: ", books)
     }, [filterBy])
 
     function loadBooks() {
@@ -54,7 +55,6 @@ export function BookIndex() {
 
 
     function onSetFilter(filterBy) {
-        console.log('filterBy:', filterBy)
         setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
     }
     // console.log('index render');

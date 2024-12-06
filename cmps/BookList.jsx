@@ -16,6 +16,7 @@ export function BookList({ books }) {
                     <section>
                         <button><Link to={`/book/${book.id}`}>see Book Details</Link></button>
                     </section>
+                    <div>{console.log("inside BookList - books are: ", books)}</div>
                 </li>
             )}   
         </ul>   

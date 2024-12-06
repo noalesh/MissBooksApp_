@@ -26,31 +26,56 @@ export const bookService = {
 function query(filterBy = {}) {
     return storageService.query(BOOK_KEY)
         .then(books => {
-            console.log("inside query - filterBy is: ", filterBy)
+            console.log("DEBUG - inside query - filterBy is: ", filterBy)
             if (filterBy.title) {
                 const regExp = new RegExp(filterBy.title, 'i')
                 books = books.filter(book => regExp.test(book.title))
             }
 
-            if (filterBy.minPrice) {
-                if (filterBy.maxPrice) {
-                    books = books.filter(book => (book.listPrice.amount>=filterBy.minPrice) 
-                                                && (book.listPrice.amount <= filterBy.maxPrice))
-                } else {
-                    books = books.filter(book => book.listPrice.amount >= filterBy.minPrice)
-                }
-            } else if (filterBy.maxPrice) {
-                books = books.filter(book => book.listPrice.amount <= filterBy.maxPrice)
+            if (filterBy.author) {
+                const regExp = new RegExp(filterBy.author, 'i')
+                books = books.filter(book => didAuthorFilterWriteTheBook(book, regExp))
             }
 
+            if (filterBy.minPrice) {
+                books = books.filter(book => book.listPrice.amount >= filterBy.minPrice)
+            } 
+            
+            if (filterBy.maxPrice) {
+                books = books.filter(book => book.listPrice.amount <= filterBy.maxPrice)
+            }
+        
+            if (filterBy.minPublishedYear) {
+                books = books.filter(book => book.publishedDate >= filterBy.minPublishedYear)
+            } 
+            
+            if (filterBy.maxPublishedYear) {
+                books = books.filter(book => book.publishedDate <= filterBy.maxPublishedYear)
+            }
 
-                // TODO - filtering 
+            if (filterBy.language) {
+                const regExp = new RegExp(filterBy.language, 'i')
+                books = books.filter(book => regExp.test(book.language))
+            }
+            
+        
 
-            console.log("PLEASE NOTICE  no filter is implemented yet... TODO")
-    
-            return books
-
+                // TODO - continue filtering     
+        return books
         })
+    }
+
+
+function didAuthorFilterWriteTheBook(book, regExp) {
+    // assumptions:
+    // authors is an array, the author we are looking for is one author
+    //for (author of book.authors) {
+    for (let i=0; i<book.authors.length; i++) {
+        if (book.authors[i].match(regExp)) {
+            return true
+        }
+    }
+    return false
 }
 
 function get(bookId) {
@@ -72,6 +97,7 @@ function save(book) {
 
 function _setNextPrevBookId(book) {
     return query().then((books) => {
+        console.log("_setNextPrevBookId: books.length is: ", books.length)  // 20 !!!!!!!!!!!!!!!!!!!!
         const bookIdx = books.findIndex((currBook) => currBook.id === book.id)
         const nextBook = books[bookIdx + 1] ? books[bookIdx + 1] : books[0]
         const prevBook = books[bookIdx - 1] ? books[bookIdx - 1] : books[books.length - 1]
@@ -86,11 +112,16 @@ function _setNextPrevBookId(book) {
 //       id, description, thumbnail.
 // I also don't allow filter by: subtitle.
 // Only 1 author in filter is supported.
+
 // TODO - I can't default to null or undefined!
+//          WHY DEFAULT TO EMPTY STRING ? ? 
 // ??????????
+
+
+
 // I defaulted all the values that we can filter by to 'undefined', so I
 // will know what the user input is. It can't be null as this causes an 
-// error when i set the value inpt the <input> when implementing
+// error when i set the value inpוt the <input> when implementing
 // the "2-way data binding".  
 function getDefaultFilter(
         filterBy = { title:'',  

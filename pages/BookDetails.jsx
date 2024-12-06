@@ -74,8 +74,7 @@ export function BookDetails() {
     }
 
 
-/// TODO - what is prevBookId ??? where do we set it ??? ////////
-/// TODO - can I assume that the books' images will be called by their title?
+    /// TODO - can I assume that the books' images will be called by their title?
 
     if (!book) return <div>Loading Book Info...</div>
     console.log("inside BookDetails... book is: ", book)
