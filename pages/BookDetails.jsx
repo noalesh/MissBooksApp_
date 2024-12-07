@@ -97,6 +97,7 @@ export function BookDetails() {
             <img src={book.thumbnail} alt="book-cover-image" />
             <br></br>
             <button onClick={onBack}>Back</button>
+            <button><Link to={`/book/edit/${book.id}`}>Edit Book</Link></button>
             <section>
                 <button><Link to={`/book/${book.prevBookId}`}>Prev Book</Link></button>
                 <button><Link to={`/book/${book.nextBookId}`}>Next Book</Link></button>
