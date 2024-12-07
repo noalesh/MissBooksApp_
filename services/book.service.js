@@ -89,9 +89,9 @@ function remove(bookId) {
 
 function save(book) {
     if (book.id) {
-        return storageService.put(CAR_KEY, car)
+        return storageService.put(BOOK_KEY, book)
     } else {
-        return storageService.post(CAR_KEY, car)
+        return storageService.post(BOOK_KEY, book)
     }
 }
 
@@ -189,9 +189,9 @@ function _createBook(id, title, subtitle, authors,
     return newBook
 }
 
-function getEmptyBook(id="", title="", subtitle="", authors=[], 
-    publishedDate=null, description="", pageCount=0, 
-    categories=[], thumbnail=null, language="", listPrice={}) {
+function getEmptyBook(id="", title="", subtitle="", authors="", 
+    publishedDate="", description="", pageCount="", 
+    categories="", thumbnail="", language="", listPrice="") {
 
         return { 
                 id, 

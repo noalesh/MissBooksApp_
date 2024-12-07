@@ -7,6 +7,8 @@ const { Link } = ReactRouterDOM
 
 */
 
+//<div>{console.log("inside BookList - books are: ", books)}</div>
+
 export function BookList({ books }) {
     return (
         <ul className="book-list">
@@ -15,8 +17,8 @@ export function BookList({ books }) {
                     <BookPreview book={book} />
                     <section>
                         <button><Link to={`/book/${book.id}`}>see Book Details</Link></button>
+                        <button><Link to={`/book/edit/${book.id}`}>Edit Book</Link></button>
                     </section>
-                    <div>{console.log("inside BookList - books are: ", books)}</div>
                 </li>
             )}   
         </ul>   
