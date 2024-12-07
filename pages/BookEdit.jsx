@@ -33,6 +33,12 @@ export function BookEdit() {
         }
     }, [])
 
+
+ /* // for debug purposes only :  
+    useEffect(() => {
+        console.log("DEBUG - bookToEdit.listPrice.isOnSalechanged , and is now: ", bookToEdit.listPrice.isOnSale)
+    }, [bookToEdit.listPrice.isOnSale]) */
+
     function loadBook() {
         bookService.get(bookId)
             .then(setBookToEdit)
@@ -55,6 +61,35 @@ export function BookEdit() {
         setBookToEdit((prevBook) => ({ ...prevBook, [field]: value }))
     }
 
+    function handlePriceChange ({ target }) {
+        let { value, name } = target
+        let newListPrice= bookToEdit.listPrice
+        console.log("inside handlePriceChange , value is: ", value, " and name is: ", name)
+
+        switch (target.type) {
+            case 'range':
+            case 'number':
+                value = +target.value
+                break
+            case 'checkbox':
+                value = target.checked
+                break
+        }
+
+        switch (name) {
+            case 'price':
+                newListPrice.amount = value
+                console.log("DEBUG - changed the newListPrice.amount to ", value)
+                break
+            case 'onSale' :
+                newListPrice.isOnSale = value
+                console.log("DEBUG - changed the newListPrice.isOnSale to ", value)
+                break
+        }
+        setBookToEdit( (prevBook) => ({ ...prevBook, listPrice: newListPrice}))
+
+    }
+
     function onSaveBook(ev) {
         ev.preventDefault()
         bookService.save(bookToEdit)
@@ -71,30 +106,41 @@ export function BookEdit() {
     // for now I only support book edit (no "add" button is shown to
     // the user) but this component can handke add as well in the future.
     const { title, subtitle, authors, publishedDate,  description, 
-        pageCount, categories, language
-    } = bookToEdit
-
+        pageCount, categories, language, listPrice} = bookToEdit
+    
     return (
         <section className="book-edit">
             <h1>{bookId ? 'Edit' : 'Add'} Book</h1>
             <form onSubmit={onSaveBook}>
                 <label htmlFor="bookName">Title: </label>
-                <input  value={title} onChange={handleChange} type="text" name="title" id="bookName" />
+                <input value={title} onChange={handleChange} type="text" name="title" id="bookName" />
 
                 <label htmlFor="subtitle">Subtitle: </label>
-                <input  value={subtitle} onChange={handleChange} type="text" name="subtitle" id="subtitle" />
+                <input value={subtitle} onChange={handleChange} type="text" name="subtitle" id="subtitle" />
                
+                <label htmlFor="authors">Authors: </label>
+                <input value={authors} onChange={handleChange} type="text" name="authors" id="authors" />
+
                 <label htmlFor="description">Description: </label>
-                <input  value={description} onChange={handleChange} type="text" name="description" id="description" />
+                <input value={description} onChange={handleChange} type="text" name="description" id="description" />
 
                 <label htmlFor="publishedDate">Published Year: </label>
-                <input  value={publishedDate} onChange={handleChange} type="number" name="publishedDate" id="publishedDate" />
+                <input value={publishedDate} onChange={handleChange} type="number" name="publishedDate" id="publishedDate" />
 
                 <label htmlFor="pageCount">Page Count: </label>
-                <input  value={pageCount} onChange={handleChange} type="number" name="pageCount" id="pageCount" />
+                <input value={pageCount} onChange={handleChange} type="number" name="pageCount" id="pageCount" />
+
+                <label htmlFor="categories">Categories: </label>
+                <input value={categories} onChange={handleChange} type="text" name="categories" id="categories" />
 
                 <label htmlFor="lang">Language: </label>
-                <input  value={language} onChange={handleChange} type="text" name="language" id="lang" />
+                <input value={language} onChange={handleChange} type="text" name="language" id="lang" />
+
+                <label htmlFor="price">Price: </label>
+                <input value={listPrice.amount} onChange={handlePriceChange} type="number" name="price" id="price" />
+
+                <label htmlFor="isOnSale">on Sale ?: </label>
+                <input checked={listPrice.isOnSale} onChange={handlePriceChange} type="checkbox" name="onSale" id="isOnSale" />
 
                 <button>Save!</button>
 

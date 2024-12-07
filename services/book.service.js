@@ -191,7 +191,8 @@ function _createBook(id, title, subtitle, authors,
 
 function getEmptyBook(id="", title="", subtitle="", authors="", 
     publishedDate="", description="", pageCount="", 
-    categories="", thumbnail="", language="", listPrice="") {
+    categories="", thumbnail="", language="", 
+    listPrice={amount:'', currencyCode: '', isOnSale:''}) {
 
         return { 
                 id, 
