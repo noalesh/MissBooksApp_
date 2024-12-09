@@ -43,12 +43,6 @@ export function BookFilter({ defaultFilter, onSetFilter }) {
 
     // note to self:
     // the "+" is for converting the string into a number.
-    function handleBookMinPriceChange(ev) {
-        setFilterByToEdit(filter => ({...filter, minPrice: +ev.target.value}))
-    }
-
-    function handleBookMaxPriceChange(ev) {
-        setFilterByToEdit(filter => ({...filter, maxPrice: +ev.target.value}))
     }  */
 
     // following funtion is from class :
@@ -91,7 +85,10 @@ export function BookFilter({ defaultFilter, onSetFilter }) {
     // enter the "book details", and click next book/prev book/back -> the results does not show the filtering.
     ////////////////    ????????????????
 
-    
+    // note to self:
+    // for input type 'number' I enter the || '' so if the user deletes the value,
+    // the 'handleChange' function will turn it into a 0, and we want it to be '' on the 
+    // screen (in the input tab).
     return (
         <article className="book-filter">
            <h1>Please enter filter values:</h1>
@@ -103,16 +100,16 @@ export function BookFilter({ defaultFilter, onSetFilter }) {
                 <input  value={author} onChange={handleChange} type="text" name="author" id="author" />
 
                 <label htmlFor="minPrice">Min Price: </label>
-                <input  value={minPrice} onChange={handleChange} type="number" name="minPrice" id="minPrice" />
+                <input  value={minPrice || ''} onChange={handleChange} type="number" name="minPrice" id="minPrice" />
 
                 <label htmlFor="maxPrice">Max Price: </label>
-                <input  value={maxPrice} onChange={handleChange} type="number" name="maxPrice" id="maxPrice" />
+                <input  value={maxPrice || ''} onChange={handleChange} type="number" name="maxPrice" id="maxPrice" />
 
                 <label htmlFor="minPublishedYear">Min Published Year: </label>
-                <input  value={minPublishedYear} onChange={handleChange} type="number" name="minPublishedYear" id="minPublishedYear" />
+                <input  value={minPublishedYear || ''} onChange={handleChange} type="number" name="minPublishedYear" id="minPublishedYear" />
 
                 <label htmlFor="maxPublishedYear">Max Published Year: </label>
-                <input  value={maxPublishedYear} onChange={handleChange} type="number" name="maxPublishedYear" id="maxPublishedYear" />
+                <input  value={maxPublishedYear || ''} onChange={handleChange} type="number" name="maxPublishedYear" id="maxPublishedYear" />
                 
                 <label htmlFor="lang">Language: </label>
                 <input  value={language} onChange={handleChange} type="text" name="language" id="lang" />

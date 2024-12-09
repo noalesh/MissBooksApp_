@@ -1,8 +1,10 @@
 import { BookFilter } from "../cmps/BookFilter.jsx"
 import { BookList } from "../cmps/BookList.jsx"
 import { bookService } from "../services/book.service.js"
+import { getTruthyValues } from './util.service.js'
 
-const { Link } = ReactRouterDOM
+
+const { Link, useSearchParams} = ReactRouterDOM
 const { useEffect, useState } = React
 
 /* this is a SMART component, and the most complex one - hub - 
@@ -17,13 +19,20 @@ const { useEffect, useState } = React
 */
 export function BookIndex() {
 
+    const [searchParams, setSearchParams] = useSearchParams()
     const [books, setBooks] = useState(null)
-    const [filterBy, setFilterBy] = useState(bookService.getDefaultFilter())
+    const [filterBy, setFilterBy] = useState(bookService.getFilterFromSrcParams(searchParams))
 
-
+    // in every search we want the filter settings to go into the url. this way
+    // the filter results show even if the page is being reloaded.
+    // getTruthyValues filters out values that are null/undefined/'',
+    // just to have a cleaner url.. to see only keys that have a value.
     useEffect(() => {
+        setSearchParams(getTruthyValues(filterBy))
         loadBooks()
-      //  console.log("inside BookIndex useEffect - books.length: ", books)
+       // console.log("inside BookIndex useEffect - books.length: ", books)
+        //console.log("inside BookIndex useEffect - filterBy is: ", filterBy)
+
     }, [filterBy])
 
     function loadBooks() {

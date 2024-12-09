@@ -15,6 +15,7 @@ export const bookService = {
     save,
     getEmptyBook,
     getDefaultFilter,
+    getFilterFromSrcParams,
 }
 
 // For Debug (easy access from console):
@@ -123,24 +124,50 @@ function _setNextPrevBookId(book) {
 // will know what the user input is. It can't be null as this causes an 
 // error when i set the value inpוt the <input> when implementing
 // the "2-way data binding".  
+
+// TODO - filter by categories /////////
+
 function getDefaultFilter(
         filterBy = { title:'',  
-        author:'', publishedDate:'', 
-        pageCount:'', categories:'',
+        author:'', minPublishedYear:'', maxPublishedYear : '',
+        pageCount:'', /*categories:'',*/
         language:'', minPrice:'', maxPrice:'' }) {
     return {    
             title: filterBy.title, 
             author: filterBy.author,
-            publishedDate: filterBy.publishedDate,
+            minPublishedYear: filterBy.minPublishedYear,
+            maxPublishedYear: filterBy.maxPublishedYear,
             pageCount: filterBy.pageCount, 
-            categories: filterBy.categories,
+//            categories: filterBy.categories,
             language: filterBy.language,
             minPrice: filterBy.minPrice,
             maxPrice: filterBy.maxPrice
         }
 }
 
-// TODO - filter by price
+function getFilterFromSrcParams(searchParams) {
+    const title = searchParams.get('title') || ''
+    const author = searchParams.get('author') || ''
+    const minPublishedYear = searchParams.get('minPublishedYear') || ''
+    const maxPublishedYear = searchParams.get('maxPublishedYear') || ''
+    const pageCount = searchParams.get('pageCount') || ''
+    const language = searchParams.get('language') || ''
+    const minPrice = searchParams.get('minPrice') || ''
+    const maxPrice = searchParams.get('maxPrice') || ''
+
+    return {
+        title,
+        author,
+        minPublishedYear,
+        maxPublishedYear,
+        pageCount,
+        language,
+        minPrice,
+        maxPrice
+    }
+
+}
+
 
 function _createBooks() {
     let books = utilService.loadFromStorage(BOOK_KEY)
