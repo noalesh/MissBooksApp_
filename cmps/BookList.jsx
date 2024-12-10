@@ -1,4 +1,7 @@
 import { BookPreview } from "./BookPreview.jsx";
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
+const { useEffect } = React
+
 
 const { Link } = ReactRouterDOM
 
@@ -10,6 +13,17 @@ const { Link } = ReactRouterDOM
 //<div>{console.log("inside BookList - books are: ", books)}</div>
 
 export function BookList({ books }) {
+
+    // TODO - why doesn't work ????? /////////////////////////////////
+    // I want that if we use filter and no book is found - emit error userMsg.  //// HOW? ///////
+
+ /*   useEffect(() => {
+        if (!books || books.length==0) {
+            console.log("inside BookList - not books were found...")
+            showErrorMsg("Could not find books...:(")
+        }
+    }, [])*/
+    
     return (
         <ul className="book-list">
            {books.map(book =>
