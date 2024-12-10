@@ -45,6 +45,8 @@ export function BookEdit() {
             .then(setBookToEdit)
             .catch(err => {
                 console.log('Problem getting book', err);
+                showErrorMsg('Problem getting book')
+
             })
     }
 
@@ -65,7 +67,7 @@ export function BookEdit() {
     function handlePriceChange ({ target }) {
         let { value, name } = target
         let newListPrice= bookToEdit.listPrice
-        console.log("inside handlePriceChange , value is: ", value, " and name is: ", name)
+     //   console.log("inside handlePriceChange , value is: ", value, " and name is: ", name)
 
         switch (target.type) {
             case 'range':
@@ -105,10 +107,9 @@ export function BookEdit() {
     }
 
     // 2 way data binding 
-    // TODO - price , authors, categories  //////////////
 
-    // for now I only support book edit (no "add" button is shown to
-    // the user) but this component can handle add as well in the future.
+    // this component supports EDIT / ADD book.
+    // if there is bookId - edit.
     const { title, subtitle, authors, publishedDate,  description, 
         pageCount, categories, language, listPrice} = bookToEdit
     

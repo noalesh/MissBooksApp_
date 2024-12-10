@@ -68,23 +68,6 @@ export function BookIndex() {
     function onSetFilter(filterBy) {
         setFilterBy(prevFilter => ({ ...prevFilter, ...filterBy }))
     }
-    // console.log('index render');
-    
-   /* if (!cars) return <div>Loading...</div>
-    return (
-        <section className="car-index">
-            <CarFilter defaultFilter={filterBy} onSetFilter={onSetFilter} />
-
-            <section>
-                <Link to="/car/edit">Add Car</Link>
-            </section>
-            <CarList
-                cars={cars}
-                onRemoveCar={onRemoveCar}
-            />
-        </section>
-    )
-    }*/
 
     /* note to self - 
      <ul>
@@ -98,6 +81,11 @@ export function BookIndex() {
     return (
         <section className="book-index">
            <BookFilter defaultFilter={filterBy} onSetFilter={onSetFilter}/>
+           <section>
+                <Link to="/book/edit">
+                    <button>Add New Book</button>
+                </Link>
+            </section>
            <BookList books={books} onRemoveBook={onRemoveBook}/>
         </section>
     )
