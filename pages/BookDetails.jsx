@@ -98,6 +98,7 @@ export function BookDetails() {
             <br></br>
             <button onClick={onBack}>Back</button>
             <button><Link to={`/book/edit/${book.id}`}>Edit Book</Link></button>
+            <button><Link to={`/book/review/${book.id}`}>Leave a Review</Link></button>
             <section>
                 <button><Link to={`/book/${book.prevBookId}`}>Prev Book</Link></button>
                 <button><Link to={`/book/${book.nextBookId}`}>Next Book</Link></button>
