@@ -1,4 +1,5 @@
 import { bookService } from "../services/book.service.js"
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
 const { useState, useEffect } = React
 const { useNavigate, useParams } = ReactRouterDOM
@@ -79,11 +80,11 @@ export function BookEdit() {
         switch (name) {
             case 'price':
                 newListPrice.amount = value
-                console.log("DEBUG - changed the newListPrice.amount to ", value)
+            //    console.log("DEBUG - changed the newListPrice.amount to ", value)
                 break
             case 'onSale' :
                 newListPrice.isOnSale = value
-                console.log("DEBUG - changed the newListPrice.isOnSale to ", value)
+              //  console.log("DEBUG - changed the newListPrice.isOnSale to ", value)
                 break
         }
         setBookToEdit( (prevBook) => ({ ...prevBook, listPrice: newListPrice}))
@@ -93,9 +94,12 @@ export function BookEdit() {
     function onSaveBook(ev) {
         ev.preventDefault()
         bookService.save(bookToEdit)
-            .then(() => navigate('/book'))
+            .then(() => {navigate('/book')
+                showSuccessMsg("Book changes were saved!")
+            })
             .catch(err => {
                 console.log('Cannot save!', err)
+                showErrorMsg("Something went worng.. Cannot save book...")
             })
 
     }
@@ -104,7 +108,7 @@ export function BookEdit() {
     // TODO - price , authors, categories  //////////////
 
     // for now I only support book edit (no "add" button is shown to
-    // the user) but this component can handke add as well in the future.
+    // the user) but this component can handle add as well in the future.
     const { title, subtitle, authors, publishedDate,  description, 
         pageCount, categories, language, listPrice} = bookToEdit
     

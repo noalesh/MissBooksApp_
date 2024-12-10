@@ -27,7 +27,7 @@ export const bookService = {
 function query(filterBy = {}) {
     return storageService.query(BOOK_KEY)
         .then(books => {
-            console.log("DEBUG - inside query - filterBy is: ", filterBy)
+       //     console.log("DEBUG - inside query - filterBy is: ", filterBy)
             if (filterBy.title) {
                 const regExp = new RegExp(filterBy.title, 'i')
                 books = books.filter(book => regExp.test(book.title))
@@ -98,7 +98,7 @@ function save(book) {
 
 function _setNextPrevBookId(book) {
     return query().then((books) => {
-        console.log("_setNextPrevBookId: books.length is: ", books.length)  // 20 !!!!!!!!!!!!!!!!!!!!
+   //     console.log("_setNextPrevBookId: books.length is: ", books.length)  // 20 !!!!!!!!!!!!!!!!!!!!
         const bookIdx = books.findIndex((currBook) => currBook.id === book.id)
         const nextBook = books[bookIdx + 1] ? books[bookIdx + 1] : books[0]
         const prevBook = books[bookIdx - 1] ? books[bookIdx - 1] : books[books.length - 1]

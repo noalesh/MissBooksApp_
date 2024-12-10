@@ -6,6 +6,7 @@ import { About } from "./pages/About.jsx"
 import { Team } from "./cmps/AboutCmp/Team.jsx"
 import { Vision } from "./cmps/AboutCmp/Vision.jsx"
 import { NotFound } from "./cmps/NotFound.jsx"
+import { UserMsg } from "./cmps/UserMsg.jsx"
 import { BookDetails } from "./pages/BookDetails.jsx"
 import { BookEdit } from "./pages/BookEdit.jsx"
 import { BookIndex } from "./pages/BookIndex.jsx"
@@ -33,6 +34,7 @@ export function RootCmp() {
                         <Route path="*" element={<NotFound/>} />
                 </Routes>
             </main>
+            <UserMsg />
         </section>
         </Router>
     )

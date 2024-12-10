@@ -2,7 +2,7 @@ import { BookFilter } from "../cmps/BookFilter.jsx"
 import { BookList } from "../cmps/BookList.jsx"
 import { bookService } from "../services/book.service.js"
 import { getTruthyValues } from './util.service.js'
-
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
 const { Link, useSearchParams} = ReactRouterDOM
 const { useEffect, useState } = React
@@ -32,7 +32,6 @@ export function BookIndex() {
         loadBooks()
        // console.log("inside BookIndex useEffect - books.length: ", books)
         //console.log("inside BookIndex useEffect - filterBy is: ", filterBy)
-
     }, [filterBy])
 
     function loadBooks() {
@@ -54,10 +53,13 @@ export function BookIndex() {
     function onRemoveBook(bookId) {
         bookService.remove(bookId)
             .then(() => {
-                setBooks(books => books.filter(book => book.id !== bookId))
+                setBooks(books => {books.filter(book => book.id !== bookId)
+                showSuccessMsg("Book was successfully removed!")
+                })
             })
             .catch(err => {
                 console.log('Problems removing book:', err)
+                showErrorMsg("Problems removing book...")
             })
     }
 
