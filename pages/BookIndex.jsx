@@ -53,9 +53,18 @@ export function BookIndex() {
     function onRemoveBook(bookId) {
         bookService.remove(bookId)
             .then(() => {
-                setBooks(books => {books.filter(book => book.id !== bookId)
+                /* important note to self - the following is WORNG :
+                    setBooks(books => {books.filter(book => book.id !== bookId)})
+                In case of a single line arrow function, having the {} around the 
+                function's body isn't just a matter of apperance - if that one statement 
+                in the function should return a value, we can either drop the {} or add
+                a 'return', like so:
+                    setBooks(books => {return books.filter(book => book.id !== bookId)})
+                Adding {} without 'return' will cause the return value to be ignored.
+                 */
+                setBooks(books => books.filter(book => book.id !== bookId))
                 showSuccessMsg("Book was successfully removed!")
-                })
+
             })
             .catch(err => {
                 console.log('Problems removing book:', err)
@@ -78,6 +87,7 @@ export function BookIndex() {
     */
 
     if (!books) return <div>Loading books...</div>
+  //  console.log("BookIndex rendered.. books: ", books)
     return (
         <section className="book-index">
            <BookFilter defaultFilter={filterBy} onSetFilter={onSetFilter}/>
@@ -86,7 +96,11 @@ export function BookIndex() {
                     <button>Add New Book</button>
                 </Link>
             </section>
-           <BookList books={books} onRemoveBook={onRemoveBook}/>
+            { books ? 
+                <BookList books={books} onRemoveBook={onRemoveBook}/>
+                :
+                <div>Loading books...</div>
+            }
         </section>
     )
 }

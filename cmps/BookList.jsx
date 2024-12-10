@@ -12,7 +12,7 @@ const { Link } = ReactRouterDOM
 
 //<div>{console.log("inside BookList - books are: ", books)}</div>
 
-export function BookList({ books }) {
+export function BookList({ books, onRemoveBook}) {
 
     // TODO - why doesn't work ????? /////////////////////////////////
     // I want that if we use filter and no book is found - emit error userMsg.  //// HOW? ///////
@@ -23,6 +23,7 @@ export function BookList({ books }) {
             showErrorMsg("Could not find books...:(")
         }
     }, [])*/
+
     
     return (
         <ul className="book-list">
@@ -30,6 +31,7 @@ export function BookList({ books }) {
                 <li key={book.id}>
                     <BookPreview book={book} />
                     <section>
+                        <button onClick={() => onRemoveBook(book.id)}>Remove Book</button>
                         <button><Link to={`/book/${book.id}`}>see Book Details</Link></button>
                         <button><Link to={`/book/edit/${book.id}`}>Edit Book</Link></button>
                     </section>
