@@ -23,8 +23,8 @@ export function BookEdit() {
 
     const [bookToEdit, setBookToEdit] = useState(bookService.getEmptyBook())
     const navigate = useNavigate()
-    // if we are in 'edit' mode (the only one available right now -
-    // we should have an id. if we are in 'add' mode - we won't have one.
+    // if we are in 'edit' mode - we should have an id. 
+    // if we are in 'add' mode - we won't have one.
     const { bookId } = useParams()
 
     // in order to load async data - we gotta have useEffect.
