@@ -426,3 +426,39 @@ a.active {
 .user-msg button:hover {
     background-color: hsl(0 0% 100%/0.55);
 }
+
+.add-review {
+    background-color: var(--clr2bg);
+    padding: 0.3rem 1em;
+    margin-block: .5em;
+	max-width: 100%;
+}
+
+.add-review form {
+    display: grid;
+    grid-template-columns: 100px 200px;
+    gap: .3em;
+	max-width: 100%;
+	display:list-item;
+	margin-right:1.5em;
+}
+
+.add-review form button {
+    margin-inline: 0;
+	background-color:rgb(219, 89, 160);
+	color: blanchedalmond;
+
+}
+
+.add-review button {
+    background-color: hsla(0, 74%, 24%, 0.199);
+    border: none;
+    cursor: pointer;
+    align-self: end;
+    color: inherit;
+
+}
+
+.add-review button:hover {
+    background-color: hsl(0 0% 100%/0.55);
+}
