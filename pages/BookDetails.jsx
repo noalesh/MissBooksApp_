@@ -1,6 +1,6 @@
 import { bookService } from "../services/book.service.js"
 import { LongTxt } from "../cmps/LongTxt.jsx"
-
+import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
 
 const { useEffect, useState } = React
 const { useParams, useNavigate, Link } = ReactRouterDOM
@@ -22,7 +22,7 @@ export function BookDetails() {
             .then(setBook)
             .catch(err => {
                 console.log('Problem getting book', err)
-                alert("Sorry, we could not find the requested book...")
+                showErrorMsg('Sorry, we could not find the requested book...')
                 navigate('/book')
             })
     }
