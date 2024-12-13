@@ -16,13 +16,11 @@ export const bookService = {
     getEmptyBook,
     getDefaultFilter,
     getFilterFromSrcParams,
+    getEmptyReviewWithId
 }
 
 // For Debug (easy access from console):
 // window.bs = bookService
-
-// TODO - finish filter !!!!!!!! ///////////////////////////// TODO
-
 
 function query(filterBy = {}) {
     return storageService.query(BOOK_KEY)
@@ -59,10 +57,7 @@ function query(filterBy = {}) {
                 books = books.filter(book => regExp.test(book.language))
             }
             
-        
-
-                // TODO - continue filtering     
-        return books
+            return books
         })
     }
 
@@ -168,6 +163,14 @@ function getFilterFromSrcParams(searchParams) {
 
 }
 
+function getEmptyReviewWithId() {
+    return {
+        id: utilService.makeId(),
+        fullName: '',
+        rating: '',
+        dateOfReading: ''
+    }
+}
 
 function _createBooks() {
     let books = utilService.loadFromStorage(BOOK_KEY)
