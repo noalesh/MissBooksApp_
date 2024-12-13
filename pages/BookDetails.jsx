@@ -1,6 +1,7 @@
 import { bookService } from "../services/book.service.js"
 import { LongTxt } from "../cmps/LongTxt.jsx"
 import { showErrorMsg, showSuccessMsg } from "../services/event-bus.service.js"
+import { ReviewList } from "../cmps/ReviewList.jsx"
 
 const { useEffect, useState } = React
 const { useParams, useNavigate, Link } = ReactRouterDOM
@@ -73,11 +74,30 @@ export function BookDetails() {
         return book.listPrice.isOnSale
     }
 
+    function onRemoveReview(reviewId) {
+        const newReviewsArray = book.reviews.filter(review => review.id !== reviewId)
+        const newBook = {...book, reviews:newReviewsArray}
+        setBook( (prevBook) => ({...prevBook, reviews:newReviewsArray}))
+
+        // TODO - does it matter if we first update db or local state?
+
+        bookService.save(newBook)
+            .then(() => {navigate(`/book/${book.id}`)
+                showSuccessMsg("Book review was removed!")
+            })
+            .catch(err => {
+                console.log('Cannot remove review!', err)
+                showErrorMsg("Something went worng.. Cannot remove review...")
+            })
+    
+        
+        //console.log("onRemoveReview was called... book.reviews : ", book.reviews)
+    }
 
     /// TODO - can I assume that the books' images will be called by their title?
 
     if (!book) return <div>Loading Book Info...</div>
-    console.log("inside BookDetails... book is: ", book)
+  //  console.log("inside BookDetails... book is: ", book)    
     return (
         <section className="book-details">
             <h1>Book Details :</h1>
@@ -96,6 +116,13 @@ export function BookDetails() {
                 {isOnSale() && <span className="importantInfo">ON SALE!!!</span>}</h2>
             <img src={book.thumbnail} alt="book-cover-image" />
             <br></br>
+            <section className="book-reviews">
+                { (book.hasOwnProperty("reviews") && book.reviews.length!==0) ? 
+                    <ReviewList reviews={book.reviews} onRemoveReview={onRemoveReview}/>
+                    :
+                    <div className="no-book-reviews">No reviews yet!</div>
+                }
+            </section>
             <button onClick={onBack}>Back</button>
             <button><Link to={`/book/edit/${book.id}`}>Edit Book</Link></button>
             <button><Link to={`/book/review/${book.id}`}>Leave a Review</Link></button>

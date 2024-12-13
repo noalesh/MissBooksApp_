@@ -339,20 +339,15 @@ a.active {
 	font-style: italic;
 }
 
-
 .book-preview .book-name {
 	color: rgb(226, 15, 205);
 }
-
 
 .book-filter {
     background-color: var(--clr2bg);
     padding: 0.3rem 1em;
     margin-block: .5em;
 	max-width: 100%;
-
-	
-    
 }
 
 .book-filter form {
@@ -365,9 +360,10 @@ a.active {
 }
 
 .book-filter form button {
-    margin-inline: 0;
+	margin-inline: 5;
 	background-color:rgb(219, 89, 160);
 	color: blanchedalmond;
+	margin-left: 2em;
 
 }
 
@@ -435,19 +431,18 @@ a.active {
 }
 
 .add-review form {
-    display: grid;
-    grid-template-columns: 100px 200px;
     gap: .3em;
 	max-width: 100%;
-	display:list-item;
 	margin-right:1.5em;
+	margin-bottom:1.5em;
+	margin-left: 1em;
 }
 
 .add-review form button {
-    margin-inline: 0;
+    margin-inline: 5;
 	background-color:rgb(219, 89, 160);
 	color: blanchedalmond;
-
+	margin-left: 2em;
 }
 
 .add-review button {
@@ -456,9 +451,45 @@ a.active {
     cursor: pointer;
     align-self: end;
     color: inherit;
-
 }
 
 .add-review button:hover {
     background-color: hsl(0 0% 100%/0.55);
+}
+
+.add-review  input[type=text], select {
+	width: 100%;
+	padding: 8px 12px;
+	margin: 8px 0;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+  }
+
+  .review-list {
+    list-style: none;
+    padding: 15px 0 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px;
+}
+
+.review-list li {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color:rgb(233, 206, 221);
+    padding-block: 0.2em;
+}
+
+.review-list button {
+    background-color:rgb(139, 13, 82);
+	color: blanchedalmond;
+}
+
+.no-book-reviews {
+	color: rgb(189, 14, 146);
+	margin: .5em 0 .5em;
+	font-family: 'Edu VIC WA NT Beginner', cursive;
+	font-size: 2em;
 }

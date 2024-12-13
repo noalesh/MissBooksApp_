@@ -9,6 +9,7 @@ const { useNavigate, useParams } = ReactRouterDOM
 export function AddReview() {
 
     const [bookToReview, setBookToReview] = useState(null)
+    const [newReview, setNewReview] = useState(bookService.getEmptyReviewWithId())
     const navigate = useNavigate()
     const { bookId } = useParams()
 
@@ -32,8 +33,22 @@ export function AddReview() {
 
     function onSaveReview(ev) {
         ev.preventDefault()
-        bookService.save(bookToReview)
-            .then(() => { navigate('/book/:bookId')
+        // 1. update local state (optimistic strategy... Should O update database first? )
+        let newBook = {}
+        if (bookToReview.reviews) {
+            const newReviewsArray = [...bookToReview.reviews, newReview]
+            newBook = {...bookToReview, reviews:newReviewsArray}
+        } else {
+            newBook = {...bookToReview, reviews:[newReview]}
+        }
+        // TODO - can I do:           setBookToReview(newBook) 
+        setBookToReview(bookToReview => newBook) 
+
+        // 2. save to database.
+        bookService.save(newBook)
+            .then(() => { 
+            //    console.log("inside onSaveReview - bookToReview.reviews: " , bookToReview.reviews)
+                navigate(`/book/${bookId}`)
                 showSuccessMsg("Book Review was added!")
             })
             .catch(err => {
@@ -48,26 +63,25 @@ export function AddReview() {
         navigate(`/book/${bookId}`)
     }
 
+
     function handleChange({ target }) {
-      /*  let { value, name: field } = target
+
+    // every Book holds a Reviews array.
+    // when adding a new review - add the review to the array.
+
+        let { value, name } = target
         switch (target.type) {
-            case 'range':
-            case 'number':
+            case 'select-one':
                 value = +target.value
                 break
-            case 'checkbox':
-                value = target.checked
-                break
         }
-        setBookToEdit((prevBook) => ({ ...prevBook, [field]: value })) */
-        ///// TODO
-        
-        console.log("handleChange in AddReview")
+        // we also have type 'text' for the reviewr's name and type date.
+        setNewReview((newReview) => ({ ...newReview, [name]: value }))     
     }
 
     return (
         <section className="add-review">
-            <h1>Leave a review.... UNDER CONSTRUCTION...</h1>
+            <h1>Leave a review....</h1>
             <button onClick={onBack}>Back to Book Details</button>
             <form onSubmit={onSaveReview}>
                 <label htmlFor="fullName">Full Name: </label>
@@ -81,8 +95,8 @@ export function AddReview() {
                     <option value="4">4</option>
                     <option value="5">5</option>
                 </select>
-                <label htmlFor="dateRead">Date Of Reading: </label>
-                <input onChange={handleChange} type="date" name="dateRead" id="dateRead" />
+                <label htmlFor="dateOfReading">Date Of Reading: </label>
+                <input onChange={handleChange} type="date" name="dateOfReading" id="dateOfReading" />
 
                 <button>Save!</button>
 
